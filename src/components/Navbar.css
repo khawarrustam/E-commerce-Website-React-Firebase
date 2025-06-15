@@ -1,0 +1,150 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #222;
+  color: #fff;
+  padding: 12px 32px;
+}
+.navbar-logo a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.navbar-links {
+  display: flex;
+  gap: 24px;
+}
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.navbar-links a.active, .navbar-links a:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+.navbar-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px 16px 32px;
+  z-index: 1000;
+  background: transparent;
+  transition: background 0.3s;
+  box-sizing: border-box;
+  overflow-x: visible;
+}
+
+.navbar-img.scrolled {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo-img {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links-img {
+  display: flex;
+  gap: 24px;
+}
+
+.navbar-links-img a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-links-img a:hover {
+  color: #007bff;
+}
+
+.navbar-icons-img {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-right: 0;
+  min-width: 80px;
+}
+
+.navbar-icons-img a {
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-icons-img a:hover {
+  color: #007bff;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.icon-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  overflow: visible;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4444;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 900px) {
+  .navbar-img {
+    padding: 12px 20px 12px 24px;
+  }
+  .navbar-links-img {
+    display: none;
+  }
+  .navbar-icons-img {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-img {
+    padding: 8px 10px 8px 12px;
+  }
+  .navbar-icons-img a {
+    padding: 6px;
+  }
+  .cart-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+  }
+} 
