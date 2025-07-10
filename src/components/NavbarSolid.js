@@ -1,7 +1,7 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import './NavbarSolid.css';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../CartContext';
 
 const categories = [
   { name: 'Home', path: '/' },
@@ -12,12 +12,27 @@ const categories = [
 ];
 
 function NavbarSolid() {
-  const { cartItems } = useCart();
-  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const { cart } = useCart();
+  const cartCount = (cart || []).reduce((sum, item) => sum + item.quantity, 0);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isHome) {
+      setScrolled(false);
+      return;
+    }
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHome]);
 
   return (
     <>
-      <nav className="navbar-solid">
+      <nav className={`navbar-solid${isHome && scrolled ? ' navbar-solid-home' : ''}`}>
         <div className="navbar-logo-solid">
           <img src="https://www.pakpedia.pk/files/Image/J.-Junaid-Jamshed.png" alt="Junaid Jamshed Logo" height="40" />
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../CartContext';
 import './ItemListPage.css';
 
 function ItemListPage() {

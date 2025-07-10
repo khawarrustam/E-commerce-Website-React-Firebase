@@ -1,12 +1,13 @@
 import React from 'react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../CartContext';
 import { Link } from 'react-router-dom';
 import './Cart.css';
 
 const Cart = () => {
-  const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
+  const { cart, removeFromCart, updateQuantity } = useCart();
+  const cartTotal = (cart || []).reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  if (cartItems.length === 0) {
+  if (!cart || cart.length === 0) {
     return (
       <div className="cart-empty">
         <h2>Your cart is empty</h2>
@@ -21,7 +22,7 @@ const Cart = () => {
       <h1>Shopping Cart</h1>
       <div className="cart-container">
         <div className="cart-items">
-          {cartItems.map((item) => (
+          {cart.map((item) => (
             <div key={item.id} className="cart-item">
               <div className="item-image">
                 <img src={item.image} alt={item.name} />
@@ -71,7 +72,7 @@ const Cart = () => {
           <h2>Order Summary</h2>
           <div className="summary-row">
             <span>Subtotal</span>
-            <span>Rs. {getCartTotal()}</span>
+            <span>Rs. {cartTotal}</span>
           </div>
           <div className="summary-row">
             <span>Shipping</span>
@@ -79,7 +80,7 @@ const Cart = () => {
           </div>
           <div className="summary-row total">
             <span>Total</span>
-            <span>Rs. {getCartTotal()}</span>
+            <span>Rs. {cartTotal}</span>
           </div>
           <button className="checkout-btn">Proceed to Checkout</button>
           <Link to="/" className="continue-shopping">Continue Shopping</Link>

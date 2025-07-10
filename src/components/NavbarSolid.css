@@ -108,6 +108,11 @@
   z-index: 999;
 }
 
+.navbar-solid-home {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  box-shadow: none;
+}
+
 @media (max-width: 900px) {
   .navbar-solid {
     padding: 10px 16px 0 16px;

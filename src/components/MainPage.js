@@ -35,53 +35,64 @@ const MainPage = () => {
   ];
 
   return (
-    <div className="main-page">
-      <div className="main-content">
-        <div className="main-header">
-          <h1>Our Collections</h1>
-          <p>Discover our exclusive range of premium products</p>
-        </div>
-        
-        <div className="category-grid">
-          {categories.map((category) => (
-            <Link to={`/items/${category.key}`} key={category.key} className="category-card">
-              <div className="category-image">
-                <img src={category.image} alt={category.name} />
-                <div className="category-overlay">
-                  <div className="category-content">
-                    <h3>{category.name}</h3>
-                    <p>{category.description}</p>
-                    <span className="category-items">{category.items}</span>
-                    <button className="explore-btn">
-                      Explore Collection
-                      <span className="arrow">→</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="main-features">
-          <div className="feature">
-            <i className="feature-icon">🚚</i>
-            <h3>Free Shipping</h3>
-            <p>On orders over $50</p>
-          </div>
-          <div className="feature">
-            <i className="feature-icon">🔄</i>
-            <h3>Easy Returns</h3>
-            <p>30 days return policy</p>
-          </div>
-          <div className="feature">
-            <i className="feature-icon">🔒</i>
-            <h3>Secure Payment</h3>
-            <p>100% secure checkout</p>
+    <>
+      <div className="main-hero-section">
+        <div className="main-hero-overlay">
+          <div className="main-hero-content">
+            <h1 className="main-hero-title">Welcome to E-Shop</h1>
+            <p className="main-hero-subtitle">Discover premium fashion, beauty, and fragrances. Shop the latest collections now!</p>
+            <a href="/items/gents" className="main-hero-btn">Shop Now</a>
           </div>
         </div>
       </div>
-    </div>
+      <div className="main-page">
+        <div className="main-content">
+          <div className="main-header">
+            <h1>Our Collections</h1>
+            <p>Discover our exclusive range of premium products</p>
+          </div>
+          
+          <div className="category-grid">
+            {categories.map((category) => (
+              <Link to={`/items/${category.key}`} key={category.key} className="category-card">
+                <div className="category-image">
+                  <img src={category.image} alt={category.name} />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <h3>{category.name}</h3>
+                      <p>{category.description}</p>
+                      <span className="category-items">{category.items}</span>
+                      <button className="explore-btn">
+                        Explore Collection
+                        <span className="arrow">→</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="main-features">
+            <div className="feature">
+              <i className="feature-icon">🚚</i>
+              <h3>Free Shipping</h3>
+              <p>On orders over $50</p>
+            </div>
+            <div className="feature">
+              <i className="feature-icon">🔄</i>
+              <h3>Easy Returns</h3>
+              <p>30 days return policy</p>
+            </div>
+            <div className="feature">
+              <i className="feature-icon">🔒</i>
+              <h3>Secure Payment</h3>
+              <p>100% secure checkout</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

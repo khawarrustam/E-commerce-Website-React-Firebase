@@ -12,6 +12,7 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [cartHistory, setCartHistory] = useState([]);
   const [user, setUser] = useState(auth.currentUser);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   // Listen for auth state changes
   useEffect(() => {
@@ -25,33 +26,48 @@ export function CartProvider({ children }) {
   useEffect(() => {
     if (user) {
       const fetchCart = async () => {
-        const cartRef = doc(db, 'carts', user.uid);
-        const cartSnap = await getDoc(cartRef);
-        if (cartSnap.exists()) {
-          setCart(cartSnap.data().items || []);
-          setCartHistory(cartSnap.data().history || []);
-        } else {
+        try {
+          const cartRef = doc(db, 'carts', user.uid);
+          const cartSnap = await getDoc(cartRef);
+          if (cartSnap.exists()) {
+            setCart(cartSnap.data().items || []);
+            setCartHistory(cartSnap.data().history || []);
+            console.log('Cart loaded from Firestore:', cartSnap.data().items);
+          } else {
+            setCart([]);
+            setCartHistory([]);
+            console.log('No cart found in Firestore for user:', user.uid);
+          }
+        } catch (error) {
+          console.error('Failed to fetch cart from Firestore:', error);
           setCart([]);
           setCartHistory([]);
         }
+        setHasLoaded(true);
       };
       fetchCart();
     } else {
       setCart([]);
       setCartHistory([]);
+      setHasLoaded(false);
     }
   }, [user]);
 
-  // Save cart and history to Firestore if logged in
+  // Save cart and history to Firestore if logged in and after initial load
   useEffect(() => {
-    if (user) {
+    if (user && hasLoaded) {
       const saveCart = async () => {
-        const cartRef = doc(db, 'carts', user.uid);
-        await setDoc(cartRef, { items: cart, history: cartHistory });
+        try {
+          const cartRef = doc(db, 'carts', user.uid);
+          await setDoc(cartRef, { items: cart, history: cartHistory });
+          console.log('Cart saved to Firestore:', cart);
+        } catch (error) {
+          console.error('Failed to save cart to Firestore:', error);
+        }
       };
       saveCart();
     }
-  }, [cart, cartHistory, user]);
+  }, [cart, cartHistory, user, hasLoaded]);
 
   const addToCart = (item) => {
     setCart((prev) => {

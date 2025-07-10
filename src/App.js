@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
 import NavbarSolid from './components/NavbarSolid';
 import MainPage from './components/MainPage';
 import ItemListPage from './components/ItemListPage';
@@ -11,13 +10,13 @@ import Login from './components/Login';
 import './App.css';
 
 function AppContent() {
-  const location = useLocation();
-  const isMainPage = location.pathname === '/';
+  // const location = useLocation();
+  // const isMainPage = location.pathname === '/';
 
   return (
     <>
       <Sidebar />
-      {isMainPage ? <Navbar /> : <NavbarSolid />}
+      <NavbarSolid />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/items/:category" element={<ItemListPage />} />

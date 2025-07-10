@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { CartProvider } from './context/CartContext';
+import { CartProvider } from './CartContext';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
